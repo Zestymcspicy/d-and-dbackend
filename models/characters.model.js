@@ -5,4 +5,9 @@ let CharacterSchema = new Schema({
   name: {type: String, required: true, max: 100},
   level: {type: Number, required: true},
   class: {type: String, required: true},
-})
+  // name: {type: String, required: false, max: 100},
+  // level: {type: Number, required: false},
+  // class: {type: String, required: false},
+});
+
+module.exports = mongoose.model('Character', CharacterSchema);
