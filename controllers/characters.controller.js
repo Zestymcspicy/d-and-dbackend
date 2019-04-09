@@ -12,6 +12,7 @@ exports.character_create = function(req, res, next) {
       class: req.body.class
     }
   )
+  
   character.save(function (err) {
     if(err) {
       return next(err);
