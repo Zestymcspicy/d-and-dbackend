@@ -18,7 +18,8 @@ exports.user_sign_in = async function(req, res, next) {
 };
 
 exports.user_create = async function(req, res, next) {
-  User.findOne({ displayName: new RegExp(displayName, "i") })
+  const checkName = new RegExp(req.body.displayName, "i")
+  User.findOne({ displayName: checkName })
     .then(user => {
       if (user) {
         console.log("A user with a similar name already exists");
