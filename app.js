@@ -4,6 +4,7 @@ const multer = require("multer");
 const upload = multer();
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
+const comment = require("./routes/comments.route");
 const app = express();
 
 app.use((req, res, next) => {
@@ -44,6 +45,7 @@ app.use(upload.array());
 app.use(express.static("public"));
 app.use("/characters", character);
 app.use("/users", user);
+app.use("/comments", comment);
 
 let port = 1234;
 
