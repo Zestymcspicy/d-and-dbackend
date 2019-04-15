@@ -22,8 +22,7 @@ app.use((req, res, next) => {
 });
 
 const mongoose = require("mongoose");
-let dev_db_url =
-  "mongodb+srv://HalTheDM:69kq8nesMo4t924W@cluster0-b9mkm.mongodb.net/test?retryWrites=true";
+let dev_db_url = secret.mongoPasscode;
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose
   .connect(
