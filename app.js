@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const upload = multer();
+const secret = require("./secret")
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
@@ -30,7 +31,7 @@ mongoose
     { useNewUrlParser: true }
   )
   .then(() => {
-    console.log("connection success");
+    console.log("connected to mongo");
   })
   .catch(() => {
     console.log("error");
