@@ -1,18 +1,35 @@
 const Character = require('../models/characters.model');
+const User = require('../models/user.model')
 
 exports.test = function(req, res) {
   res.send('Greetings from the test controller!');
 };
 
-exports.character_create = function(req, res, next) {
+exports.character_create = async function(req, res, next) {
   let character = new Character(
     {
       name: req.body.name,
       level: req.body.level,
-      class: req.body.class
+      class: req.body.class,
+      race: req.body.race,
+      user: req.body.user
     }
   )
-  
+  await User.findOne({_id: character.user}).then(user => {
+    let newCharacters = user.characters
+    if (newCharacters===undefined) {
+      newCharacters=[];
+    }
+    newCharacters.push(character);
+    user.characters = newCharacters;
+    console.log(user)
+    user.save(function (err){
+      if(err) {
+        err.send(err);
+      }
+      console.log('UserCharacter saved successfully!')
+    })
+  })
   character.save(function (err) {
     if(err) {
       return next(err);
