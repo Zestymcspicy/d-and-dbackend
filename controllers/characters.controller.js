@@ -5,6 +5,11 @@ exports.test = function(req, res) {
   res.send('Greetings from the test controller!');
 };
 
+exports.character_get_all = function(req, res, next){
+  Character.find().then(x=> res.send({body:x}))
+  .catch(err=> error.send(err))
+}
+
 exports.character_create = async function(req, res, next) {
   let character = new Character(
     {
@@ -20,7 +25,7 @@ exports.character_create = async function(req, res, next) {
     if (newCharacters===undefined) {
       newCharacters=[];
     }
-    newCharacters.push(character);
+    newCharacters.push(character._id);
     user.characters = newCharacters;
     console.log(user)
     user.save(function (err){
@@ -34,7 +39,7 @@ exports.character_create = async function(req, res, next) {
     if(err) {
       return next(err);
     }
-    res.send('Character created successfully!')
+    res.send({message: 'Character created successfully!', body: character})
   })
 }
 
@@ -46,10 +51,18 @@ exports.character_details = function (req, res) {
 };
 
 exports.character_update  = function (req, res) {
-  Character.findByIdAndUpdate(req.params.id, {$set: req.body}, function(err, character) {
-    if(err) return next(err);
-    res.send("Character Updated");
+  Character.findById(req.params.id, function(err, character) {
+    character[req.body.type] = req.body.content
+    character.save( function(err) {
+    if(err) {
+      console.log(err)
+      return next(err);
+    }
+    res.send({
+      body: character,
+    });
   });
+});
 };
 
 exports.character_delete = function (req, res) {

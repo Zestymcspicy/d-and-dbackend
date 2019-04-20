@@ -6,9 +6,9 @@ let CharacterSchema = new Schema({
   level: {type: Number, required: true},
   class: {type: String, required: true},
   user: {type: String},
-  race: {type: String}
-  // name: {type: String, required: false, max: 100},
-  // level: {type: Number, required: false},
+  race: {type: String},
+  summary: {type: String, required: false, max: 5000},
+  icon: {type: String, required: false, default: "images/baseDragon.png"},
   // class: {type: String, required: false},
 });
 
