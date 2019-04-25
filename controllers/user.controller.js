@@ -49,7 +49,7 @@ exports.user_create = async function(req, res, next) {
               return next(err);
             }
             console.log("user saved successfully!");
-            res.send({message:"user saved successfully!", user: user});
+            res.send({message:"success", user: user});
         });
       })
     })
