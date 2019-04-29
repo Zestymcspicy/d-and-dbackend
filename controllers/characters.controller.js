@@ -52,7 +52,18 @@ exports.character_details = function (req, res) {
 
 exports.character_update  = function (req, res) {
   Character.findById(req.params.id, function(err, character) {
-    character[req.body.type] = req.body.content
+    let content;
+    if(req.body.type==="journals") {
+      let newJournals = character.journals;
+      let myJournal = JSON.parse(req.body.content)
+      newJournals.push(myJournal);
+      content = newJournals;
+
+      // if(character.journals)
+    } else {
+      content=req.body.content
+    }
+    character[req.body.type] = content;
     character.save( function(err) {
     if(err) {
       console.log(err)

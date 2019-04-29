@@ -9,7 +9,7 @@ let CharacterSchema = new Schema({
   race: {type: String},
   summary: {type: String, required: false, max: 5000},
   icon: {type: String, required: false, default: "images/baseDragon.png"},
-  // class: {type: String, required: false},
+  journals: {type: Array, default: [], required: false},
 });
 
 module.exports = mongoose.model('Character', CharacterSchema);

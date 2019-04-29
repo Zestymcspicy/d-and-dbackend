@@ -6,7 +6,8 @@ let UserSchema = new Schema({
   password: {type: String, required: true, max: 64},
   email: {type: String, required: true, max: 64},
   admin: {type: Boolean, required: true},
-  characters: {type: Array, default: []}
+  characters: {type: Array, default: []},
+  comments: {type: Array, default: []}
 });
 
 UserSchema.query.byDisplayName = function(displayName) {

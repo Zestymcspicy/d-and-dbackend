@@ -6,6 +6,7 @@ const secret = require("./secret")
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
+const passport = require("passport");
 const app = express();
 
 app.use((req, res, next) => {
@@ -39,6 +40,7 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(upload.array());
