@@ -10,6 +10,7 @@ let CharacterSchema = new Schema({
   summary: {type: String, required: false, max: 5000},
   icon: {type: String, required: false, default: "images/baseDragon.png"},
   journals: {type: Array, default: [], required: false},
+  comments: {type: Array, default: []},
 });
 
 module.exports = mongoose.model('Character', CharacterSchema);

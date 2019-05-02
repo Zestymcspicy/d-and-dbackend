@@ -7,7 +7,8 @@ let UserSchema = new Schema({
   email: {type: String, required: true, max: 64},
   admin: {type: Boolean, required: true},
   characters: {type: Array, default: []},
-  comments: {type: Array, default: []}
+  comments: {type: Array, default: []},
+  icon: {type: String, default: "images/baseDragon.png"},
 });
 
 UserSchema.query.byDisplayName = function(displayName) {

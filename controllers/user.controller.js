@@ -5,6 +5,23 @@ const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 const secret = require("../secret")
 
+
+exports.change_icon = function(req, res, next) {
+  User.findById(req.params.id, function(err, user) {
+    if(err) {
+      return next(err);
+    }
+    user.icon = req.body.icon;
+    user.save(function(err) {
+      if(err) {
+        err.send(err)
+      }
+      res.send({message: "success", user: user})
+    })
+  })
+}
+
+
 exports.user_sign_in = async function(req, res, next) {
   const { errors, isValid } = validateLoginInput(req.body);
   if (!isValid) {
