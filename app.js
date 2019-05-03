@@ -6,6 +6,7 @@ const secret = require("./secret")
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
+const image = require("./routes/images.route");
 const passport = require("passport");
 const app = express();
 
@@ -43,11 +44,12 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(upload.array());
+app.use(upload.single("image"));
 app.use(express.static("public"));
 app.use("/characters", character);
 app.use("/users", user);
 app.use("/comments", comment);
+app.use("/images", image);
 
 let port = 1234;
 

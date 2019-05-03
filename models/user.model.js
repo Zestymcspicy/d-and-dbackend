@@ -11,8 +11,5 @@ let UserSchema = new Schema({
   icon: {type: String, default: "images/baseDragon.png"},
 });
 
-UserSchema.query.byDisplayName = function(displayName) {
-    return this.where({displayName: new RegExp(this.displayName, 'i')});
-}
 
 module.exports = mongoose.model('User', UserSchema);
