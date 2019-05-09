@@ -2,7 +2,7 @@ const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
 
 let ImageSchema = new Schema({
-  img: {type: Buffer, contentType: String}
+  address: {type: String, required: true}
 });
 
 module.exports = mongoose.model('Image', ImageSchema);

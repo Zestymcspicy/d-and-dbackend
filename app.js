@@ -6,6 +6,7 @@ const secret = require("./secret")
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
+const signS3 = require("./routes/sign-s3.route");
 const image = require("./routes/images.route");
 const passport = require("passport");
 const app = express();
@@ -13,8 +14,8 @@ const app = express();
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
-    "Access-Control-Allow-Header",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Cache-Control"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -42,14 +43,15 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use(passport.initialize());
+app.use(upload.single("image"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(upload.single("image"));
 app.use(express.static("public"));
 app.use("/characters", character);
 app.use("/users", user);
 app.use("/comments", comment);
 app.use("/images", image);
+app.use("/sign-s3", signS3);
 
 let port = 1234;
 
