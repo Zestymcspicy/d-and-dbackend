@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 const mongoose = require("mongoose");
 let dev_db_url = process.env.MONGO_PASSCODE;
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+// const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose
   .connect(
     dev_db_url,
