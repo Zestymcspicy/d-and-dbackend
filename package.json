@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app"
   },
-  "author": "",
+  "author": "Harold Beckerman",
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.451.0",
@@ -23,5 +23,8 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "validator": "^10.11.0"
+  },
+  "engines": {
+    "node": "8.11.2"
   }
 }

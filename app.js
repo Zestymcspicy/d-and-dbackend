@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const upload = multer();
-const secret = require("./secret")
+// const secret = require("./secret")
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 const mongoose = require("mongoose");
-let dev_db_url = secret.mongoPasscode;
+let dev_db_url = process.env.MONGO_PASSCODE;
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose
   .connect(

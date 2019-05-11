@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
-const secret = require("../secret")
+// const secret = require("../secret")
 
 
 exports.change_icon = function(req, res, next) {
@@ -43,7 +43,7 @@ exports.user_sign_in = async function(req, res, next) {
           };
           jwt.sign(
             payload,
-            secret.secretOrKey,
+            process.env.SECRET_OR_KEY,
             {
               expiresIn: 31556926
             },
