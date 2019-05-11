@@ -51,6 +51,7 @@ app.use("/sign-s3", signS3);
 
 const port = process.env.PORT || 1234;
 
+app.get("/", (res, req) => res.send("Hello World"))
 
 app.listen(port, () => {
   console.log("Server is up and running on port number" + port);
