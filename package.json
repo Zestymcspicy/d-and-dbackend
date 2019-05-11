@@ -17,6 +17,7 @@
     "fs": "0.0.1-security",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.2.4",
     "mongoose": "^5.4.21",
     "multer": "^1.4.1",
     "nodemon": "^1.18.11",
@@ -25,6 +26,7 @@
     "validator": "^10.11.0"
   },
   "engines": {
-    "node": "8.11.2"
+    "node": "v8.11.2",
+    "npm": "5.6.0"    
   }
 }
