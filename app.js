@@ -2,12 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const upload = multer();
-const secret = require("./secret")
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
 const signS3 = require("./routes/sign-s3.route");
-const image = require("./routes/images.route");
 const passport = require("passport");
 const app = express();
 
@@ -25,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 const mongoose = require("mongoose");
-let dev_db_url = process.env.MONGODB_URI || secret.mongoPasscode;
+let dev_db_url = process.env.MONGODB_URI || 'mongodb://localhost/danddbackend';
 mongoose
   .connect(
     dev_db_url,
@@ -49,7 +47,6 @@ app.use(express.static("public"));
 app.use("/characters", character);
 app.use("/users", user);
 app.use("/comments", comment);
-// app.use("/images", image);
 app.use("/sign-s3", signS3);
 
 const port = process.env.PORT || 1234;
