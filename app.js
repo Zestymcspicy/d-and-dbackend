@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const upload = multer();
-// const secret = require("./secret")
+const secret = require("./secret")
 const user = require("./routes/user.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
@@ -25,8 +25,8 @@ app.use((req, res, next) => {
 });
 
 const mongoose = require("mongoose");
-let dev_db_url = process.env.MONGO_PASSCODE;
-// const mongoDB = process.env.MONGODB_URI || dev_db_url;
+let dev_db_url = process.env.MONGO_PASSCODE || secret.mongoPasscode;
+// const mongoDB = secret.mongoPasscode || dev_db_url;
 mongoose
   .connect(
     dev_db_url,
@@ -50,10 +50,13 @@ app.use(express.static("public"));
 app.use("/characters", character);
 app.use("/users", user);
 app.use("/comments", comment);
-app.use("/images", image);
+// app.use("/images", image);
 app.use("/sign-s3", signS3);
 
-let port = 1234;
+let port = process.env.PORT;
+if(port==null||port=="") {
+  port = 1234;
+}
 
 app.listen(port, () => {
   console.log("Server is up and running on port number" + port);
