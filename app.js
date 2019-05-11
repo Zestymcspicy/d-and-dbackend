@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 const mongoose = require("mongoose");
-let dev_db_url = process.env.MONGODB_URI || 'mongodb://localhost/danddbackend';
+let dev_db_url = process.env.MONGODB_URI;
 mongoose
   .connect(
     dev_db_url,
