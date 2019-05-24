@@ -7,7 +7,8 @@ let CommentSchema = new Schema({
   content: { type: String, required: true, max: 50000 },
   childOf: {type: String, required: true},
   icon: {type: String, default: "images/baseDragon.png"},
-  dateTime: { type: Date, default: Date.now }
+  dateTime: { type: Date, default: Date.now },
+  votes: {type: String, default: '{"score": 0}'},
 });
 
 module.exports = mongoose.model("Comment", CommentSchema);

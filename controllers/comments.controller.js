@@ -8,6 +8,26 @@ exports.comments_get = function(req, res, next) {
     .catch(err => console.log(err));
 };
 
+exports.comment_votes = function(req, res, next) {
+  Comment.findById(req.params.id, function(err, comment) {
+    if(err) {
+      console.log(err);
+      return next(err);
+    } else {
+      comment.votes = req.body.votes;
+      comment.save(function(err) {
+        if(err) {
+          console.log(err)
+          return next(err);
+        } else {
+          res.send({body: comment})
+        }
+      });
+    }
+  })
+};
+
+
 exports.comment_add = async function(req, res, next) {
   let comment = new Comment({
     auth_id: req.body.auth_id,
