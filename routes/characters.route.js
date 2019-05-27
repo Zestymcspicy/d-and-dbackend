@@ -8,4 +8,5 @@ router.post('/create', characters_controller.character_create);
 router.get('/:id', characters_controller.character_details);
 router.put('/:id/update', characters_controller.character_update);
 router.delete('/:id/delete', characters_controller.character_delete);
+router.put('/delete-journal', characters_controller.delete_journal)
 module.exports = router;

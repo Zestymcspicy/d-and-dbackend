@@ -1,6 +1,23 @@
 const Character = require('../models/characters.model');
 const User = require('../models/user.model')
 
+exports.delete_journal = function(req, res, next) {
+  Character.findById(req.body.character_id, function(err, character) {
+    const journal_id = req.body.journal_id
+    if(err) return next(err);
+    let newJournals = character.journals.filter(journal => Number(journal._id) !== Number(journal_id));
+    character.journals = newJournals;
+    console.log(newJournals);
+    character.save(function(err) {
+      if(err){
+        res.send(err)
+      } else {
+        res.send({message:"journal deleted", journal_id: journal_id})
+      }
+    })
+  })
+}
+
 exports.test = function(req, res) {
   res.send('Greetings from the test controller!');
 };
