@@ -70,13 +70,26 @@ exports.character_details = function (req, res) {
 exports.character_update  = function (req, res) {
   Character.findById(req.params.id, function(err, character) {
     let content;
+    let newJournals;
     if(req.body.type==="journals") {
-      let newJournals = character.journals;
       let myJournal = JSON.parse(req.body.content)
+      console.log(myJournal)
+      if(myJournal._id){
+        newJournals = character.journals.filter(journal => {
+          journal._id.toString() !== myJournal._id.toString()
+        });
+      } else {
+        newJournals = character.journals;
+      }
       newJournals.push(myJournal);
       content = newJournals;
 
-      // if(character.journals)
+    // if(req.body.type==="editJournal") {
+    //   let myJournal = JSON.parse(req.body.content)
+    //   newJournals.push(myJournal);
+    //   content = newJournals;
+    // }
+
     } else {
       content=req.body.content
     }

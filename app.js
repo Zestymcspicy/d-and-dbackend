@@ -7,7 +7,7 @@ const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
 const signS3 = require("./routes/sign-s3.route");
 const passport = require("passport");
-const secret = require("./secret");
+// const secret = require("./secret");
 const app = express();
 
 app.use((req, res, next) => {
@@ -24,8 +24,8 @@ app.use((req, res, next) => {
 });
 
 const mongoose = require("mongoose");
-let dev_db_url = process.env.MONGODB_URI || secret.mongoPasscode;
-// let dev_db_url = process.env.MONGODB_URI
+// let dev_db_url = process.env.MONGODB_URI || secret.mongoPasscode;
+let dev_db_url = process.env.MONGODB_URI
 mongoose
   .connect(
     dev_db_url,
