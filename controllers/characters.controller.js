@@ -73,7 +73,6 @@ exports.character_update  = function (req, res) {
     let newJournals;
     if(req.body.type==="journals") {
       let myJournal = JSON.parse(req.body.content)
-      console.log(myJournal)
       if(myJournal._id){
         newJournals = character.journals.filter(journal => {
           journal._id.toString() !== myJournal._id.toString()

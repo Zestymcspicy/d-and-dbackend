@@ -1,5 +1,5 @@
 const aws = require('aws-sdk');
-const secret = require('../secret.js')
+// const secret = require('../secret.js')
 
 aws.config.region = 'us-east-1';
 aws.config.credentials = ({
