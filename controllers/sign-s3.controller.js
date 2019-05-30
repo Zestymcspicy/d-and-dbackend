@@ -1,12 +1,9 @@
 const aws = require('aws-sdk');
-// const secret = require('../secret.js')
 
 aws.config.region = 'us-east-1';
 aws.config.credentials = ({
   accessKeyId: process.env.S3_KEY,
   secretAccessKey: process.env.S3_SECRET
-  // accessKeyId: secret.AWSKey,
-  // secretAccessKey: secret.AWSSecret
 })
 
 exports.get_signature = function(req, res) {

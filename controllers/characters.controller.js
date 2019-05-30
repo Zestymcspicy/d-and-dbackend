@@ -7,7 +7,6 @@ exports.delete_journal = function(req, res, next) {
     if(err) return next(err);
     let newJournals = character.journals.filter(journal => Number(journal._id) !== Number(journal_id));
     character.journals = newJournals;
-    console.log(newJournals);
     character.save(function(err) {
       if(err){
         res.send(err)
@@ -44,7 +43,6 @@ exports.character_create = async function(req, res, next) {
     }
     newCharacters.push(character._id);
     user.characters = newCharacters;
-    console.log(user)
     user.save(function (err){
       if(err) {
         err.send(err);
@@ -70,24 +68,20 @@ exports.character_details = function (req, res) {
 exports.character_update  = function (req, res) {
   Character.findById(req.params.id, function(err, character) {
     let content;
+
     let newJournals;
     if(req.body.type==="journals") {
-      let myJournal = JSON.parse(req.body.content)
-      if(myJournal._id){
-        newJournals = character.journals.filter(journal => {
-          journal._id.toString() !== myJournal._id.toString()
-        });
+      let myJournal = JSON.parse(req.body.content)      
+      if(character.journals.every(journal => `${journal._id}`!==`${myJournal._id}`)){
+          newJournals = character.journals;
       } else {
-        newJournals = character.journals;
+        newJournals = character.journals.filter(journal => `${journal._id}` !== `${myJournal._id}`);
       }
+      if(err) res.send(err);
       newJournals.push(myJournal);
       content = newJournals;
 
-    // if(req.body.type==="editJournal") {
-    //   let myJournal = JSON.parse(req.body.content)
-    //   newJournals.push(myJournal);
-    //   content = newJournals;
-    // }
+
 
     } else {
       content=req.body.content

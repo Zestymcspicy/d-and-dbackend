@@ -32,8 +32,7 @@ exports.user_sign_in = async function(req, res, next) {
     if (!user) {
       console.log("user")
       return res.status(401).json({message: "user not found"});
-    }
-    console.log(req.body.displayName)
+    }    
     bcrypt.compare(req.body.password, user.password).then(isMatch => {
         if(isMatch) {
           //User Matched create jwt_payload
