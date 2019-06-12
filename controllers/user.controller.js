@@ -32,7 +32,7 @@ exports.user_sign_in = async function(req, res, next) {
     if (!user) {
       console.log("user")
       return res.status(401).json({message: "user not found"});
-    }    
+    }
     bcrypt.compare(req.body.password, user.password).then(isMatch => {
         if(isMatch) {
           //User Matched create jwt_payload
@@ -63,14 +63,6 @@ exports.user_sign_in = async function(req, res, next) {
     })
   }
 
-
-//     res.status(401).send({ message: "Wrong Password" });
-// } else {
-  //     res.status(200).send({
-    //       message: "success",
-    //       user: user
-    //     });
-    // }
 
 exports.user_create = async function(req, res, next) {
   const { errors, isValid } = validateRegisterInput(req.body);
@@ -109,3 +101,12 @@ exports.user_create = async function(req, res, next) {
   })
     .catch(err => res.send(err));
 };
+
+exports.user_icon_object = function(req, res, next) {
+  User.find({}, function(err, users) {
+  if (err) return next(err);
+  let icon_object = {}
+  users.forEach(x => icon_object[x._id] = x.icon)
+  res.send({body: icon_object})
+})
+}
