@@ -106,7 +106,8 @@ exports.user_icon_object = function(req, res, next) {
   User.find({}, function(err, users) {
   if (err) return next(err);
   let icon_object = {}
-  users.forEach(x => icon_object[x._id] = x.icon)
+  users.forEach(x => icon_object[x.displayName] = x.icon)
+
   res.send({body: icon_object})
 })
 }
