@@ -69,13 +69,16 @@ exports.character_update  = function (req, res) {
   Character.findById(req.params.id, function(err, character) {
     let content;
 
-    let newJournals;
-    if(req.body.type==="journals") {
-      let myJournal = JSON.parse(req.body.content)      
-      if(character.journals.every(journal => `${journal._id}`!==`${myJournal._id}`)){
-          newJournals = character.journals;
+    if(req.body.type==="journals" || req.body.type === "carousel") {
+      let newJournals;
+      if(!character[req.body.type]) {
+        character[req.body.type] = [];
+      }
+      let myJournal = JSON.parse(req.body.content)
+      if(character[req.body.type].every(journal => `${journal._id}`!==`${myJournal._id}`)){
+          newJournals = character[req.body.type];
       } else {
-        newJournals = character.journals.filter(journal => `${journal._id}` !== `${myJournal._id}`);
+        newJournals = character[req.body.type].filter(journal => `${journal._id}` !== `${myJournal._id}`);
       }
       if(err) res.send(err);
       newJournals.push(myJournal);
@@ -86,6 +89,7 @@ exports.character_update  = function (req, res) {
     } else {
       content=req.body.content
     }
+    console.log(content)
     character[req.body.type] = content;
     character.save( function(err) {
     if(err) {

@@ -11,6 +11,7 @@ let CharacterSchema = new Schema({
   icon: {type: String, required: false, default: "images/baseDragon.png"},
   journals: {type: Array, default: [], required: false},
   comments: {type: Array, default: []},
+  carousel: {type: Array, default: []},
 });
 
 module.exports = mongoose.model('Character', CharacterSchema);
