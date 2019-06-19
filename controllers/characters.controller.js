@@ -3,15 +3,17 @@ const User = require('../models/user.model')
 
 exports.delete_journal = function(req, res, next) {
   Character.findById(req.body.character_id, function(err, character) {
-    const journal_id = req.body.journal_id
+    res.send(req.body)
+    const journal_or_carousel_id = req.body.journal_or_carousel_id
     if(err) return next(err);
-    let newJournals = character.journals.filter(journal => Number(journal._id) !== Number(journal_id));
-    character.journals = newJournals;
+    let newJournalOrCarousel = character[req.body.type].filter
+    (journalOrCarousel => Number(journalOrCarousel._id) !== Number(journal_or_carousel_id));
+    character[req.body.type] = newJournalOrCarousel;
     character.save(function(err) {
       if(err){
         res.send(err)
       } else {
-        res.send({message:"journal deleted", journal_id: journal_id})
+        res.send({message:`${req.body.type} deleted`, [req.body.type]: journal_or_carousel_id})
       }
     })
   })
@@ -70,19 +72,21 @@ exports.character_update  = function (req, res) {
     let content;
 
     if(req.body.type==="journals" || req.body.type === "carousel") {
-      let newJournals;
+      let newJournalOrCarousel;
       if(!character[req.body.type]) {
         character[req.body.type] = [];
       }
-      let myJournal = JSON.parse(req.body.content)
-      if(character[req.body.type].every(journal => `${journal._id}`!==`${myJournal._id}`)){
-          newJournals = character[req.body.type];
+      let myJournalOrCarousel = JSON.parse(req.body.content)
+      if(character[req.body.type].every
+        (journalOrCarousel =>`${journalOrCarousel._id}`!==`${myJournalOrCarousel._id}`)){
+          newJournalOrCarousel = character[req.body.type];
       } else {
-        newJournals = character[req.body.type].filter(journal => `${journal._id}` !== `${myJournal._id}`);
+        newJournalOrCarousel = character[req.body.type].filter
+        (journalOrCarousel => `${journalOrCarousel._id}` !== `${myJournalOrCarousel._id}`);
       }
       if(err) res.send(err);
-      newJournals.push(myJournal);
-      content = newJournals;
+      newJournalOrCarousel.push(myJournalOrCarousel);
+      content = newJournalOrCarousel;
 
 
 
