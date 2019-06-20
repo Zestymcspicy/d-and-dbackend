@@ -2,10 +2,9 @@ const Character = require('../models/characters.model');
 const User = require('../models/user.model')
 
 exports.delete_journal = function(req, res, next) {
-  Character.findById(req.body.character_id, function(err, character) {
-    res.send(req.body)
+  Character.findById(req.body.character_id, function(err, character, next) {
     const journal_or_carousel_id = req.body.journal_or_carousel_id
-    if(err) return next(err);
+    if(err) res.send(err);
     let newJournalOrCarousel = character[req.body.type].filter
     (journalOrCarousel => Number(journalOrCarousel._id) !== Number(journal_or_carousel_id));
     character[req.body.type] = newJournalOrCarousel;
