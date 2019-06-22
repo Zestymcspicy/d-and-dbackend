@@ -12,7 +12,7 @@ exports.delete_journal = function(req, res, next) {
       if(err){
         res.send(err)
       } else {
-        res.send({message:`${req.body.type} deleted`, [req.body.type]: journal_or_carousel_id})
+        res.send({message:`${req.body.type} deleted`, character: character})
       }
     })
   })
