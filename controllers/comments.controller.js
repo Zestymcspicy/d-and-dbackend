@@ -14,7 +14,8 @@ exports.comment_votes = function(req, res, next) {
       console.log(err);
       return next(err);
     } else {
-      comment.votes = req.body.votes;
+      comment.votes = JSON.parse(req.body.votes);
+      // comment.votes = req.body.votes;
       comment.save(function(err) {
         if(err) {
           console.log(err)
