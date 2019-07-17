@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer");
 const upload = multer();
 const user = require("./routes/user.route");
+const group = require("./routes/groups.route");
 const character = require("./routes/characters.route");
 const comment = require("./routes/comments.route");
 const signS3 = require("./routes/sign-s3.route");
@@ -47,6 +48,7 @@ app.use(express.static("public"));
 app.use("/characters", character);
 app.use("/users", user);
 app.use("/comments", comment);
+app.use("/groups", group);
 app.use("/sign-s3", signS3);
 
 const port = process.env.PORT || 1234;
