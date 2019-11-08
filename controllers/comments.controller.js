@@ -49,7 +49,7 @@ exports.comment_add = async function(req, res, next) {
           if (err) {
             return next(err);
           }
-          return res.send({ message: "success", comment: comment, user: user });
+          res.send({ message: "success", comment: comment, user: user });
         });
       }
     })
